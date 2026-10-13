@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\caption{Efficiency per task on the Jetson AGX Orin (means over 52 tasks). Net energy subtracts idle power with the model resident. Invalid: share of tool calls rejected by the environment.}
+\label{tab:cost}
+\begin{tabular}{@{}llrrrrrrrrr@{}}
+\toprule
+Model & Arch. & Succ.\,(\%) & Latency (s) & p90 (s) & LLM calls & Tool calls & Invalid (\%) & Gen.\ tok & Tok/s & Energy (J) / net \\
+\midrule
+Qwen3-1.7B & S & 42.3 & 6.1 & 10.5 & 3.9 & 8.6 & 10.3 & 288 & 50.7 & 205 / 124 \\
+ & PE & 36.5 & 9.4 & 15.4 & 5.5 & 9.3 & 49.0 & 457 & 52.1 & 320 / 195 \\
+ & PEV & 40.4 & 11.9 & 16.8 & 7.5 & 9.5 & 35.2 & 548 & 50.3 & 411 / 253 \\
+\addlinespace[2pt]
+Llama-3.2-3B & S & 51.9 & 3.0 & 4.4 & 2.0 & 1.6 & 7.3 & 80 & 33.6 & 101 / 59 \\
+ & PE & 30.8 & 11.1 & 20.5 & 4.4 & 4.2 & 23.2 & 343 & 33.5 & 383 / 230 \\
+ & PEV & 34.6 & 17.2 & 27.3 & 7.2 & 8.1 & 18.5 & 545 & 34.9 & 589 / 352 \\
+\addlinespace[2pt]
+Qwen3-4B & S & 67.3 & 6.4 & 13.4 & 3.5 & 2.9 & 0.0 & 147 & 24.9 & 212 / 110 \\
+ & PE & 80.8 & 13.6 & 20.6 & 5.6 & 4.6 & 0.0 & 336 & 26.8 & 446 / 232 \\
+ & PEV & 86.5 & 17.8 & 31.6 & 8.2 & 7.4 & 0.0 & 447 & 27.4 & 586 / 305 \\
+\addlinespace[2pt]
+Granite-3.3-8B & S & 55.8 & 6.7 & 16.8 & 2.2 & 2.2 & 10.5 & 116 & 18.6 & 245 / 161 \\
+ & PE & 53.8 & 24.8 & 48.5 & 3.6 & 3.9 & 28.1 & 436 & 18.5 & 920 / 613 \\
+ & PEV & 53.8 & 38.3 & 67.8 & 6.1 & 7.2 & 33.3 & 669 & 18.5 & 1421 / 946 \\
+\addlinespace[2pt]
+Qwen3-8B & S & 82.7 & 7.7 & 15.9 & 3.3 & 3.0 & 0.0 & 126 & 18.0 & 274 / 178 \\
+ & PE & 75.0 & 32.4 & 34.6 & 6.5 & 4.6 & 0.8 & 287 & 17.5 & 844 / 444 \\
+ & PEV & 76.9 & 28.0 & 56.8 & 9.3 & 7.3 & 0.5 & 397 & 15.6 & 985 / 639 \\
+\bottomrule
+\end{tabular}
+\end{table*}

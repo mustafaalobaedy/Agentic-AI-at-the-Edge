@@ -1,0 +1,31 @@
+\begin{table}[t]
+\centering
+\caption{Task success rate (\%) by level and architecture. Best per column in bold.}
+\label{tab:success}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Arch. & L1 & L2 & L3 & L4 & All \\
+\midrule
+\multirow{3}{*}{Qwen3-1.7B} & S & 69 & 31 & 25 & 38 & 42 \\
+ & PE & 56 & 19 & 25 & 50 & 37 \\
+ & PEV & 62 & 19 & 33 & 50 & 40 \\
+\addlinespace[2pt]
+\multirow{3}{*}{Llama-3.2-3B} & S & 88 & 31 & 33 & 50 & 52 \\
+ & PE & 44 & 12 & 33 & 38 & 31 \\
+ & PEV & 56 & 12 & 33 & 38 & 35 \\
+\addlinespace[2pt]
+\multirow{3}{*}{Qwen3-4B} & S & 81 & 62 & 50 & \textbf{75} & 67 \\
+ & PE & \textbf{100} & 81 & 67 & 62 & 81 \\
+ & PEV & \textbf{100} & 88 & \textbf{83} & 62 & \textbf{87} \\
+\addlinespace[2pt]
+\multirow{3}{*}{Granite-3.3-8B} & S & 94 & 44 & 25 & 50 & 56 \\
+ & PE & 75 & 50 & 33 & 50 & 54 \\
+ & PEV & 75 & 50 & 33 & 50 & 54 \\
+\addlinespace[2pt]
+\multirow{3}{*}{Qwen3-8B} & S & \textbf{100} & \textbf{94} & 67 & 50 & 83 \\
+ & PE & 94 & 69 & 75 & 50 & 75 \\
+ & PEV & 94 & 75 & 75 & 50 & 77 \\
+\bottomrule
+\end{tabular}
+\end{table}
