@@ -25,11 +25,11 @@ LEVELS = ["L1-single", "L2-multi", "L3-policy", "L4-safety"]
 # validated categorical slots 1-3 (dataviz reference palette, light mode)
 COLOR = {"single": "#2a78d6", "pe": "#eb6834", "pev": "#1baf7a"}
 HATCH = {"single": "", "pe": "////", "pev": "\\\\\\\\"}
-INK, MUTED, GRID = "#1f1f1e", "#5f5e5a", "#d9d8d2"
+INK, MUTED, GRID = "#000000", "#2b2b29", "#c4c3bc"
 
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "Liberation Serif", "DejaVu Serif"],
-                     "font.size": 8, "axes.edgecolor": MUTED, "axes.labelcolor": INK, "xtick.color": MUTED,
-                     "ytick.color": MUTED, "axes.linewidth": 0.5, "hatch.linewidth": 0.4, "hatch.color": "white"})
+                     "font.size": 8, "axes.edgecolor": INK, "axes.labelcolor": INK, "xtick.color": INK,
+                     "ytick.color": INK, "text.color": INK, "legend.labelcolor": INK, "axes.linewidth": 0.5, "hatch.linewidth": 0.4, "hatch.color": "white"})
 
 
 def load(think="off"):
@@ -176,14 +176,14 @@ def style(ax):
 
 def fig_success(A):
     ms = [m for m in MODELS if any((m, a) in A for a in ARCHS)]
-    fig, ax = plt.subplots(figsize=(3.4, 1.8))
+    fig, ax = plt.subplots(figsize=(3.4, 1.95))
     w = 0.26
     x = np.arange(len(ms))
     for i, a in enumerate(ARCHS):
         v = [A[(m, a)]["succ"] if (m, a) in A else 0 for m in ms]
         ax.bar(x + (i - 1) * w, v, w - 0.03, color=COLOR[a], hatch=HATCH[a], label=ANAME[a], lw=0)
     style(ax)
-    ax.set_xticks(x, [MNAME[m] for m in ms])
+    ax.set_xticks(x, ["\n".join(MNAME[m].rsplit("-", 1)) for m in ms])  # two lines so names do not touch
     ax.set_ylabel("Task success (%)")
     ax.set_ylim(0, 100)
     ax.legend(ncol=3, frameon=False, loc="upper left", fontsize=7, handlelength=1.4, columnspacing=1.0)
@@ -199,13 +199,15 @@ def fig_tradeoff(A):
     for m in MODELS:
         pts = [(A[(m, a)]["energy"], A[(m, a)]["succ"]) for a in ARCHS if (m, a) in A]
         if len(pts) > 1:
-            ax.plot(*zip(*pts), color=GRID, lw=0.8, zorder=1)
+            ax.plot(*zip(*pts), color=MUTED, lw=0.6, zorder=1)
         if pts:
             ax.annotate(MNAME[m], pts[0], xytext=(-4, 0), textcoords="offset points", ha="right", va="center",
-                        fontsize=7, color=MUTED)
+                        fontsize=7, color=INK, zorder=2, bbox=dict(fc="white", ec="none", pad=0.3))
     style(ax)
     ax.grid(axis="x", color=GRID, lw=0.4)
     ax.set_xscale("log")
+    # leave room on the left for the model labels so they do not hit the y-axis label
+    ax.set_xlim(min(x["energy"] for x in A.values()) / 2.6, max(x["energy"] for x in A.values()) * 1.3)
     ax.set_xlabel("Energy per task (J, log scale)")
     ax.set_ylabel("Task success (%)")
     ax.set_ylim(0, 100)
