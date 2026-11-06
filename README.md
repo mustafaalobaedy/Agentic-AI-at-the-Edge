@@ -13,6 +13,7 @@ A benchmark that runs small open-weight LLM agents **fully offline** on an NVIDI
 | `run.py` | Runs a model × design grid; appends one JSON line per run to `results/runs.jsonl` (resumable) |
 | `run_all.sh` | The full experiment (main grid + thinking-mode ablation) |
 | `analyze.py` | Tables, figures, failure taxonomy, and EDA statistics |
+| `stats.py` | Bootstrap 95% CIs of success, exact McNemar tests, model-vs-design variance split (`results/stats.json`) |
 | `results/` | Raw results of every run (`runs.jsonl`) and summaries |
 
 A task succeeds only if its checker passes **and** no device outside the task's allowed set was changed.
@@ -43,6 +44,7 @@ python3 run.py --models qwen3:4b-instruct-2507-q4_K_M --archs single pe pev
 
 # tables, figures and statistics
 python3 analyze.py
+python3 stats.py      # reliability statistics -> results/stats.json
 ```
 
 Granite note: Ollama's Granite 3.3 template drops its tool-calling instruction when a custom system prompt is given, so `agents.py` re-adds IBM's official sentence for Granite models.
